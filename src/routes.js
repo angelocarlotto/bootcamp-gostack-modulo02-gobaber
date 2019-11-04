@@ -2,7 +2,7 @@ import {Router} from "express";
 const routes=new Router();
 
 routes.get("/",(req,res)=>{
-    return res.json({message:"Hello ss rrr WOrld"})
+    return res.json({message:"Hell22o ss rrr WOrld"})
 });
 
 
