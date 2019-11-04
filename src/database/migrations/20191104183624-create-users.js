@@ -19,13 +19,13 @@ module.exports = {
             password_hash: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                defaultValue: false,
             },
             provider: {
                 type: Sequelize.BOOLEAN,
                 allowNull: false,
+                defaultValue: false,
             },
-            create_at: {
+            created_at: {
                 type: Sequelize.DATE,
                 allowNull: false,
             },
