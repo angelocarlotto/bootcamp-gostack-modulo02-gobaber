@@ -58,6 +58,17 @@ class AppointmentController {
                 error: 'you can only create appointments with providers',
             });
         }
+
+        /**
+         * Check if provider_id is same user_id
+         */
+        const isProviderSameUserId = provider_id === req.userId;
+
+        if (isProviderSameUserId) {
+            return res.status(400).json({
+                error: 'you can not create appointments to your selft',
+            });
+        }
         /**
          * check for past date
          */

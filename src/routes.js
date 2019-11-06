@@ -5,6 +5,7 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import ProviderController from './app/controllers/ProviderController';
 import ScheduleController from './app/controllers/ScheduleController';
+import NotificationController from './app/controllers/NotificationController';
 import AppointmentController from './app/controllers/AppointmentController';
 import authMiddleWares from './app/middlewares/auth';
 import multerConfig from './config/multer';
@@ -22,5 +23,6 @@ routes.post('/files', upload.single('file'), FileController.store);
 routes.post('/appointments', AppointmentController.store);
 routes.get('/appointments', AppointmentController.index);
 routes.get('/schedules', ScheduleController.index);
+routes.get('/notifications', NotificationController.index);
 
 export default routes;
