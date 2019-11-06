@@ -13,7 +13,7 @@ class UserControler {
                 .min(6),
         });
 
-        if (!(await schema.isValid(res.body))) {
+        if (!(await schema.isValid(req.body))) {
             return res.status(400).json({ error: 'validation fails' });
         }
 
@@ -42,7 +42,7 @@ class UserControler {
             ),
         });
 
-        if (!(await schema.isValid(res.body))) {
+        if (!(await schema.isValid(req.body))) {
             return res.status(400).json({ error: 'validation fails' });
         }
 
