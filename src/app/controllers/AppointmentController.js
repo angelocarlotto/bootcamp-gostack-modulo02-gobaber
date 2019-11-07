@@ -64,7 +64,7 @@ class AppointmentController {
         /**
          * Check if provider_id is same user_id
          */
-        const isProviderSameUserId = provider_id === req.userId;
+        const isProviderSameUserId = false; // provider_id === req.userId;
 
         if (isProviderSameUserId) {
             return res.status(400).json({
@@ -124,7 +124,16 @@ class AppointmentController {
     async delete(req, res) {
         const appointment = await Appointment.findByPk(req.params.id, {
             include: [
-                { model: User, as: 'provider', attributes: ['name', 'email'] },
+                {
+                    model: User,
+                    as: 'provider',
+                    attributes: ['name', 'email'],
+                },
+                {
+                    model: User,
+                    as: 'user',
+                    attributes: ['name'],
+                },
             ],
         });
 
@@ -145,12 +154,22 @@ class AppointmentController {
         appointment.canceled_at = new Date();
 
         await appointment.save();
-
-        await Mail.sendMail({
+        const obj = {
             to: `${appointment.provider.name} <${appointment.provider.email}>`,
             subject: 'agendamento cancelado',
             text: 'voce tem um novo cancelamento',
-        });
+            template: 'cancellation',
+            context: {
+                provider: appointment.provider.name,
+                user: appointment.user.name,
+                date: format(
+                    parseISO(appointment.date),
+                    "'dia' dd 'de' MMM, 'às' H:mm'h'",
+                    { locale: pt }
+                ),
+            },
+        };
+        await Mail.sendMail(obj);
 
         return res.json(appointment);
     }
