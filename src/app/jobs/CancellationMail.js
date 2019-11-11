@@ -13,7 +13,7 @@ class CancellationMail {
         const { appointment } = data;
         const obj = {
             to: `${appointment.provider.name} <${appointment.provider.email}>`,
-            subject: 'agendamento cancelado',
+            subject: 'GoBArber: agendamento cancelado',
             text: 'voce tem um novo cancelamento',
             template: 'cancellation',
             context: {
